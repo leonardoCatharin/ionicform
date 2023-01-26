@@ -7,107 +7,59 @@ import { AlertController, ModalController, ToastController } from '@ionic/angula
   styleUrls: ['home.page.scss'],
 })
 
+/*
+   TypeScript é uma linguagem de programação de código aberto desenvolvida pela Microsoft. 
+   É um superconjunto sintático estrito de JavaScript e adiciona 
+   tipagem estática opcional à linguagem.
+
+   Estilo de tipagem: estática (opcional); forte.
+*/
 export class HomePage {
-  /* declaração de atributos da classe */
-  public segment = '0';
+  /* variaveis */
+  public a : number;
+  public b : number;
+  public c : number;
 
-  public pessoa = {
-      nome : '',
-      sexo : 'M',
-      data : new Date(),
-      rg   : '',
-      cpf  : ''
+  /* objetos */
+  public obj = {
+    nome : 'aula TypeScript',
+    ano  : 2023
   }
 
-  public opcoes = [
-      {valor: 'M', descricao: 'Masculino'},
-      {valor: 'F', descricao: 'Feminino'}
-  ]
+  /* lista */
+  public lista = ['julio', 'saulo', 'bruna'];
 
-  /* utilizado para o exercício (MA) */
-  public opcoesPatrimonio = [
-    { descricao: 'Casa própria'       ,    check: true  },
-    { descricao: 'Apartamento próprio',    check: false },
-    { descricao: 'Carro próprio'      ,    check: false },
-    { descricao: 'Terreno próprio'    ,    check: false }
-  ];
 
-  public opcoesEscolaridade = [
-    { descricao: 'Ensino médio completo' ,    check: false  },
-    { descricao: 'Graduação'             ,    check: false },
-    { descricao: 'Mestrado'              ,    check: false },
-    { descricao: 'Doutorado'             ,    check: false }
-  ];
-  /* --- */
+  constructor() {
+    /* executado primeiro */
+    console.log('Bem vindo');
+    alert('Bem vindo');
 
-  /* --- fim da declaração --- */
+    /* variaveis */
+    this.a = 10;
+    this.b = 5;
+    console.log(this.a + this.b);
 
-  /* injeção de dependência no construtor
-     utilizar objetos sem a necessidade de inicializa-los 
-  */
-  constructor(private alertCtrl: AlertController,
-    private toastCtrl: ToastController,
-    private modalCtrl: ModalController) {}
+    /* objetos */
+    console.log(this.obj.ano + this.obj.nome);
 
-  
-  /* métodos da classe */
-  /* podem conter os modificadores de acesso (private, public e entre outros.) */
-  limpar(){
-    this.pessoa = {
-        nome : '',
-        sexo : 'M',
-        data : new Date(),
-        rg   : '',
-        cpf  : ''
+    /* listas */
+    for(let i = 0; i < this.lista.length; i++){
+      console.log(this.lista[i]);
     }
 
-    /* parte do exercício (MA) */
-    for(let item of this.opcoesPatrimonio){
-      item.check = false;
+    /* listas */
+    /* cuidado com o undefined!!! */
+    this.lista.forEach((element, index) => {
+      console.log(index)
+    });
+
+  }
+
+  public listarNomes(){
+    /* listas */
+    for(let i = 0; i < this.lista.length; i++){
+      console.log(this.lista[i]);
     }
-
-    for(let item of this.opcoesEscolaridade){
-      item.check = false;
-    }
-    /* --- */
-  }
-
-  change(){
-      console.log(this.segment)
-  }
-
-  async salvar(){
-      const alert = await this.alertCtrl.create({
-          message : 'Deseja salvar uma pessoa?',
-          buttons : [
-              {
-                  text : 'Não',
-                  role : 'cancel',
-                  handler : (data) => {}
-              }, {
-                  text : 'Sim',
-                  handler : (data) => {
-                      this.salvaPessoa();
-                  }
-              }
-          ]
-      });
-
-      await alert.present();
-  }
-
-  async salvaPessoa(){
-      if(this.pessoa.nome == ''){
-          alert('O nome da pessoa precisa ser informado!');
-      } else {
-
-          let toast = await this.toastCtrl.create({
-              message : 'Pessoa cadastrada com sucesso',
-              duration: 2000,
-              position: 'bottom'
-          });
-
-          toast.present();
-      }
   }
 }

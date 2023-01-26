@@ -1,0 +1,104 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    
+    <ion-row>
+      <ion-col>
+        <ion-title> Formulário </ion-title>
+      </ion-col>
+    </ion-row>
+    
+    <!-- componente segmento -->
+    <!-- muito utilizado em formulários com dados separados em categorias -->
+    <!-- utilização de uma variável para controle -->
+
+    <!-- ngModel -->
+    <!-- utilizado para vincular uma variável a um elemento de formulário -->
+    <ion-segment [(ngModel)]="segment" (ionChange)="change()">
+        <ion-segment-button value="0">
+            <ion-label> Dados pessoais </ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+            <ion-label> Questionário </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <!-- ngIf -->
+  <!-- utilizado para compilar um componente ou não a partir de uma ou mais condições -->
+  <ion-grid *ngIf="segment == '0'">
+    
+    <!-- ion-item é utilizado para separar os campos -->
+    <!-- margin-bottom é uma propriedade do CSS. Veremos isso mais a frente -->
+    <ion-item style="margin-bottom: 5px;">
+      
+      <!-- position [floating, fixed, stacked] -->
+      <!-- como a label será posicionada -->
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input [(ngModel)]="pessoa.nome"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating" stacked> Sexo </ion-label>
+
+      <!-- ngFor -->
+      <!-- utilizado para iterar sobre uma lista/array -->
+      <ion-select [(ngModel)]="pessoa.sexo" placeholder="Nenhuma opção selecionada">
+        <ion-select-option *ngFor="let opcao of opcoes" [value]="opcao.valor">
+            {{ opcao.descricao }}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating" stacked> Data Nasc. </ion-label>
+      
+      <!-- type=date é uma propriedade do HTML -->
+      <ion-input type="date" [(ngModel)]="pessoa.data"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating" stacked> RG </ion-label>
+      <ion-input [(ngModel)]="pessoa.rg" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating" stacked> CPF </ion-label>
+      <ion-input class="input-form" [(ngModel)]="pessoa.cpf" type="text"></ion-input>
+    </ion-item>
+  </ion-grid>
+
+  <!-- ngIf -->
+  <!-- utilizado para compilar um componente ou não a partir de uma ou mais condições -->
+  <ion-grid *ngIf="segment == '1'">
+    outro formulário
+  </ion-grid>
+
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    
+    <!-- data binding -->
+    <!-- impressão dos atributos de pessoa -->
+    <ion-col size="12">
+      <strong> INFORMAÇÕES: </strong> <br>
+      {{ pessoa.nome }} - {{ pessoa.sexo }} - {{ pessoa.data }} - {{ pessoa.rg }} - {{ pessoa.cpf }}
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="full" color="success" (click)="salvar()"> SALVAR </ion-button>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button expand="full" color="tertiary" (click)="limpar()"> LIMPAR </ion-button>
+    </ion-col>
+  </ion-row>
+
+</ion-footer>

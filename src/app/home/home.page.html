@@ -1,136 +1,28 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    
-    <ion-row>
-      <ion-col>
-        <ion-title> Formulário </ion-title>
-      </ion-col>
-    </ion-row>
-    
-    <!-- componente segmento -->
-    <!-- muito utilizado em formulários com dados separados em categorias -->
-    <!-- utilização de uma variável para controle -->
-
-    <!-- ngModel -->
-    <!-- utilizado para vincular uma variável a um elemento de formulário -->
-    <ion-segment [(ngModel)]="segment" (ionChange)="change()">
-        <ion-segment-button value="0">
-            <ion-label> Dados pessoais </ion-label>
-        </ion-segment-button>
-        <ion-segment-button value="1">
-            <ion-label> Questionário </ion-label>
-        </ion-segment-button>
-    </ion-segment>
-
-  </ion-toolbar>
+<ion-header>
+  <ion-button color="primary" routerLink="/form">
+    <ion-icon slot="start" name="airplane-outline"></ion-icon>
+    Formulário s/ data binding
+  </ion-button>
+  <ion-button color="success" routerLink="/form2">
+    <ion-icon slot="start" name="airplane-outline"></ion-icon>
+    Formulário c/ data binding
+  </ion-button>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-
-  <!-- ngIf -->
-  <!-- utilizado para compilar um componente ou não a partir de uma ou mais condições -->
-  <ion-grid *ngIf="segment == '0'">
-    
-    <!-- ion-item é utilizado para separar os campos -->
-    <!-- margin-bottom é uma propriedade do CSS. Veremos isso mais a frente -->
-    <ion-item style="margin-bottom: 5px;">
-      
-      <!-- position [floating, fixed, stacked] -->
-      <!-- como a label será posicionada -->
-      <ion-label position="floating">Nome</ion-label>
-      <ion-input [(ngModel)]="pessoa.nome"></ion-input>
-    </ion-item>
-
-    <ion-item style="margin-bottom: 5px;">
-      <ion-label position="floating" stacked> Sexo </ion-label>
-
-      <!-- ngFor -->
-      <!-- utilizado para iterar sobre uma lista/array -->
-      <ion-select [(ngModel)]="pessoa.sexo" placeholder="Nenhuma opção selecionada">
-        <ion-select-option *ngFor="let opcao of opcoes" [value]="opcao.valor">
-            {{ opcao.descricao }}
-        </ion-select-option>
-      </ion-select>
-
-    </ion-item>
-
-    <ion-item style="margin-bottom: 5px;">
-      <ion-label position="floating" stacked> Data Nasc. </ion-label>
-      
-      <!-- type=date é uma propriedade do HTML -->
-      <ion-input type="date" [(ngModel)]="pessoa.data"></ion-input>
-    </ion-item>
-
-    <ion-item style="margin-bottom: 5px;">
-      <ion-label position="floating" stacked> RG </ion-label>
-      <ion-input [(ngModel)]="pessoa.rg" type="text"></ion-input>
-    </ion-item>
-
-    <ion-item style="margin-bottom: 5px;">
-      <ion-label position="floating" stacked> CPF </ion-label>
-      <ion-input class="input-form" [(ngModel)]="pessoa.cpf" type="text"></ion-input>
-    </ion-item>
-  </ion-grid>
-
-  <!-- ngIf -->
-  <!-- utilizado para compilar um componente ou não a partir de uma ou mais condições -->
-  <ion-grid *ngIf="segment == '1'">
-    <!-- os componentes desse GRID são o exercício da semana -->
-    <ion-row>
-      <ion-col size="12">
-        O que você possui como patrimônio?
-      </ion-col>
-      <ion-col size="12">
-        <ion-list>
-          <ion-item *ngFor="let item of opcoesPatrimonio">
-            <ion-label>{{item.descricao}}</ion-label>
-            <ion-checkbox slot="start" [(ngModel)]="item.check"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-
-    <ion-row>
-      <ion-col size="12">
-        Em relação a sua carreira acadêmica, você possui:
-      </ion-col>
-      <ion-col size="12">
-        <ion-list>
-          <ion-item *ngFor="let item of opcoesEscolaridade">
-            <ion-label>{{item.descricao}}</ion-label>
-            <ion-checkbox slot="start" [(ngModel)]="item.check"></ion-checkbox>
-          </ion-item>
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+<ion-content>
+  
+  <ion-row>
+    <ion-col>
+      Data binding: {{ obj.nome }}
+    </ion-col>
+  </ion-row>
 
 </ion-content>
+<ion-footer> 
 
-<ion-footer>
-  <ion-row>
-    
-    <!-- data binding -->
-    <!-- impressão dos atributos de pessoa -->
-    <ion-col size="12">
-      <strong> INFORMAÇÕES: </strong> <br>
-      {{ pessoa.nome }} - {{ pessoa.sexo }} - {{ pessoa.data }} - {{ pessoa.rg }} - {{ pessoa.cpf }}
-    </ion-col>
-  </ion-row>
-
-  <ion-row>
-    <ion-col size="6">
-      <ion-button expand="full" color="success" (click)="salvar()"> SALVAR </ion-button>
-    </ion-col>
-
-    <ion-col size="6">
-      <ion-button expand="full" color="tertiary" (click)="limpar()"> LIMPAR </ion-button>
-    </ion-col>
-  </ion-row>
+  <ion-button color="danger" (click)="listarNomes()">
+    <ion-icon name="finger-print"></ion-icon>
+    LISTAR NOMES
+  </ion-button>
 
 </ion-footer>
-
-<!-- 
-  O ng-if era usado no AngularJS
-  O *ngIf é usado no Angular (versão 2.x ou superior) 
--->

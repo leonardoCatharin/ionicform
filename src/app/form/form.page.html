@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-row>
+      <ion-col>
+        <ion-title> Formulário </ion-title>
+      </ion-col>
+    </ion-row>
+    
+    <!-- ion-segment -->
+    <!-- muito utilizado em formulários com dados separados em categorias -->
+    <ion-segment>
+        <ion-segment-button value="0">
+            <ion-label> Dados pessoais </ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="1">
+            <ion-label> Questionário </ion-label>
+        </ion-segment-button>
+    </ion-segment>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    
+    <!-- ion-item é utilizado para separar os campos -->
+    <!-- margin-bottom é uma propriedade do CSS. Veremos isso mais a frente -->
+    <ion-item style="margin-bottom: 5px">
+      
+      <!-- position [floating, fixed, stacked] -->
+      <!-- como a label será posicionada -->
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px">
+      <ion-label position="floating"> Sexo </ion-label>
+
+      <ion-select placeholder="Nenhuma opção selecionada">
+        <ion-select-option [value]="m"> Masculino </ion-select-option>
+        <ion-select-option [value]="f"> Feminino </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating"> Data Nasc. </ion-label>
+      <!-- type=date é uma propriedade do HTML -->
+      <ion-input type="date"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating"> RG </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-item style="margin-bottom: 5px;">
+      <ion-label position="floating"> CPF </ion-label>
+      <ion-input class="input-form" type="text"></ion-input>
+    </ion-item>
+  </ion-grid>
+</ion-content>
+
+<ion-footer>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button expand="full" color="success"> SALVAR </ion-button>
+    </ion-col>
+
+    <ion-col size="6">
+      <ion-button expand="full" color="tertiary"> LIMPAR </ion-button>
+    </ion-col>
+  </ion-row>
+</ion-footer>
